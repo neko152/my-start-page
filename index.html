@@ -1,138 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080a0f">
-<title>Start — personal dashboard</title>
-<style>
-:root{--bg:#080a0f;--side:#0d1017;--panel:#10141d;--panel2:#141925;--text:#f4f6fb;--muted:#8992a5;--dim:#5e687c;--line:#202736;--accent:#9b8cff;--accent2:#5eead4;--glow:rgba(155,140,255,.16)}
-body.light{--bg:#f4f6f9;--side:#ffffff;--panel:#ffffff;--panel2:#f0f2f6;--text:#151820;--muted:#5f6878;--dim:#8a93a2;--line:#dfe3ea;--accent:#6254d9;--accent2:#118b7a;--glow:rgba(98,84,217,.12)}
-body.light{background:radial-gradient(circle at 70% -8%,rgba(98,84,217,.10),transparent 34rem),var(--bg)}
-body.light .sidebar{background:rgba(255,255,255,.94);border-color:#dfe3ea}
-body.light .logo-mark{color:#fff;background:linear-gradient(135deg,#6254d9,#18a892)}body.light .side-bottom kbd{color:#596274}
-body.light .nav button{color:#667083}
-body.light .nav button:hover,body.light .nav button.active{background:#eef0f5;color:#171a20}
-body.light .hero-card{background:linear-gradient(135deg,#ffffff,#f7f8fa);box-shadow:0 18px 55px rgba(24,32,48,.07)}
-body.light .card{background:#ffffff;box-shadow:0 4px 18px rgba(24,32,48,.035)}
-body.light .card:hover{background:#f8f9fb;border-color:#cbd1dc;box-shadow:0 10px 28px rgba(24,32,48,.08)}
-body.light .quick a{background:#fff}
-body.light .quick a:hover{background:#eef0f5}
-body.light .searchbar{background:#fff;box-shadow:0 10px 35px rgba(24,32,48,.06)}
-body.light .searchbar select{background:#f0f2f6;color:#4f596a}
-body.light .searchbar input::placeholder{color:#8a93a2}
-body.light .round{background:#fff;color:#5f6878}
-body.light .round:hover{background:#eef0f5;border-color:#cbd1dc}
-body.light .fav{color:#a5adba}
-body.light .fav.on{color:#c58a00}
-body.light .modal{background:rgba(31,38,51,.28)}
-body.light .modal-box{background:#fff;border-color:#d7dce5;box-shadow:0 25px 80px rgba(20,28,42,.18)}
-body.light .modal-box input{background:#f7f8fa;border-color:#dfe3ea}
-body.light footer{border-color:#dfe3ea}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startpage // Hub</title>
+  <style>
+    :root {
+      --bg: #0d0f17;
+      --card-bg: rgba(22, 26, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #e2e8f0;
+      --text-muted: #8a99ad;
+      --accent-cyan: #00f2fe;
+      --accent-purple: #9d4edd;
+      --accent-pink: #ff007f;
+      --accent-green: #00ff88;
+    }
 
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 65% -5%,rgba(126,91,255,.18),transparent 32rem),radial-gradient(circle at 5% 45%,rgba(49,211,189,.06),transparent 28rem),var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}button,input{font:inherit}
-.app{display:grid;grid-template-columns:225px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:rgba(13,16,23,.78);backdrop-filter:blur(20px);padding:22px 14px;display:flex;flex-direction:column}.logo{display:flex;align-items:center;gap:10px;padding:5px 9px 25px;font-weight:800;font-size:17px}.logo-mark{width:31px;height:31px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#5eead4);color:#080a0f;display:grid;place-items:center;font-weight:900}.nav{display:grid;gap:3px}.nav button span{display:block}.nav button{border:0;background:none;color:var(--muted);text-align:left;padding:10px 11px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:10px}.nav button:hover,.nav button.active{background:var(--panel2);color:var(--text)}.side-bottom{margin-top:auto;color:var(--dim);font-size:11px;padding:12px}.side-bottom kbd{color:var(--muted)}
-main{width:min(1280px,100%);margin:auto;padding:28px 34px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.hello{color:var(--muted);font-size:13px}.hello strong{color:var(--text);font-size:15px}.top-actions{display:flex;gap:8px}.round{height:36px;min-width:36px;padding:0 11px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:10px;cursor:pointer}.round:hover{color:var(--text);border-color:#374154}
-.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-bottom:16px}.hero-card{border:1px solid var(--line);background:linear-gradient(135deg,rgba(18,22,32,.95),rgba(12,15,22,.9));border-radius:18px;padding:24px;min-height:190px;box-shadow:0 20px 70px rgba(0,0,0,.2)}.hero-card h1{font-size:34px;letter-spacing:-.045em;margin:0 0 6px}.sub{color:var(--muted)}.clock{display:flex;align-items:end;gap:8px;margin-top:32px}.time{font-size:42px;font-weight:750;letter-spacing:-.05em}.seconds{font-size:15px;color:var(--dim);padding-bottom:7px}.weather{display:flex;flex-direction:column;justify-content:space-between}.weather .big{font-size:44px;font-weight:750;letter-spacing:-.05em}.weather small{color:var(--muted)}
-.searchbar{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0 12px;margin-bottom:23px;box-shadow:0 14px 45px rgba(0,0,0,.16)}.searchbar select{border:0;background:var(--panel2);color:var(--muted);padding:8px;border-radius:8px;outline:0}.searchbar input{height:48px;flex:1;background:none;border:0;outline:0;color:var(--text);font-size:14px}.searchbar input::placeholder{color:#667084}.search-icon{font-size:19px;color:var(--dim)}kbd{font-size:10px;border:1px solid var(--line);border-bottom-color:#343d4e;border-radius:5px;padding:2px 6px;color:var(--dim)}
-.section{margin-top:26px;scroll-margin-top:20px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:11px}.title{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:750}.count{font-size:10px;color:var(--dim)}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.card{position:relative;display:flex;align-items:center;gap:11px;min-width:0;padding:11px 12px;border:1px solid var(--line);background:rgba(16,20,29,.72);border-radius:12px;transition:.18s}.card:hover{transform:translateY(-2px);border-color:#384258;background:var(--panel2);box-shadow:0 10px 30px rgba(0,0,0,.18)}.name{font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.desc{font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.fav{position:absolute;right:7px;top:5px;color:#3c4558;font-size:11px;cursor:pointer}.fav.on{color:#ffd166}.hidden{display:none!important}
-.quick{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:26px}.quick a{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:10px;text-align:center;color:var(--muted);font-size:11px}.quick a:hover{color:var(--text);background:var(--panel2)}
-footer{margin-top:35px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--dim);font-size:11px}.modal{position:fixed;inset:0;background:rgba(3,5,9,.72);backdrop-filter:blur(10px);display:none;align-items:flex-start;justify-content:center;padding-top:10vh;z-index:20}.modal.open{display:flex}.modal-box{width:min(650px,calc(100% - 25px));background:#10141d;border:1px solid #30384a;border-radius:16px;box-shadow:0 30px 100px #000;padding:12px}.modal-box input{width:100%;height:45px;background:#0a0d13;border:1px solid var(--line);border-radius:10px;padding:0 13px;color:var(--text);outline:0}.results{max-height:55vh;overflow:auto;margin-top:8px}.result{display:block;padding:11px;border-radius:9px}.result:hover{background:var(--panel2)}.result b{display:block}.result span{color:var(--dim);font-size:11px}
-@media(max-width:1050px){.grid{grid-template-columns:repeat(4,1fr)}.quick{grid-template-columns:repeat(4,1fr)}.hero{grid-template-columns:1fr}.sidebar{width:190px}.app{grid-template-columns:190px 1fr}}
-@media(max-width:760px){.app{display:block}.sidebar{position:sticky;z-index:10;top:0;height:auto;width:100%;border-right:0;border-bottom:1px solid var(--line);padding:9px}.logo{padding:4px 8px}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap}.side-bottom{display:none}main{padding:20px 14px 40px}.grid{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(4,1fr)}.hero-card h1{font-size:27px}}
-@media(max-width:430px){.grid{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.time{font-size:34px}}
-</style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.12) 0%, transparent 40%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* HEADER & CLOCK */
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #clock {
+      font-size: 4.5rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+    }
+
+    #date {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: -0.5rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    /* SEARCH BAR */
+    .search-box {
+      margin: 0 auto 3rem auto;
+      max-width: 650px;
+      position: relative;
+    }
+
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .search-input-wrapper:focus-within {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+    }
+
+    .engine-select {
+      background: transparent;
+      border: none;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding-right: 0.5rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .engine-select option {
+      background: #161a2a;
+      color: var(--text);
+    }
+
+    .search-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 1.1rem;
+      padding: 0.5rem;
+    }
+
+    /* GRID CATEGORIES */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-title.code { color: var(--accent-cyan); }
+    .category-title.learn { color: var(--accent-green); }
+    .category-title.art { color: var(--accent-pink); }
+    .category-title.tools { color: var(--accent-purple); }
+
+    .links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .link-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .link-item a:hover {
+      color: var(--text);
+      transform: translateX(4px);
+    }
+
+    .link-badge {
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+  </style>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar">
-  <div class="logo"><span class="logo-mark">S</span> my start</div>
-  <nav class="nav" id="nav"></nav>
-  <div class="side-bottom">Поиск: <kbd>Ctrl</kbd> + <kbd>K</kbd><br><br>Избранное сохраняется локально</div>
-</aside>
-<main>
-  <div class="top"><div class="hello" id="hello"></div><div class="top-actions"><button class="round" id="random" title="Случайный сайт">Случайный</button><button class="round" id="theme" title="Переключить тему">Тема</button></div></div>
-  <section class="hero">
-    <div class="hero-card"><h1>Всё нужное — здесь.</h1><div class="sub">Твоя быстрая стартовая страница без лишнего мусора.</div><div class="clock"><span class="time" id="time">00:00</span><span class="seconds" id="seconds">00</span></div></div>
-    <div class="hero-card weather"><div><div class="sub">Сегодня</div><div class="big" id="day">—</div></div><small id="fullDate">—</small></div>
-  </section>
 
-  <form class="searchbar" id="form">
-    
-    <select id="engine"><option value="https://www.google.com/search?q=">Google</option><option value="https://www.google.com/search?q=">Google</option><option value="https://duckduckgo.com/?q=">DuckDuckGo</option><option value="https://www.bing.com/search?q=">Bing</option><option value="https://yandex.ru/search/?text=">Яндекс</option></select>
-    <input id="search" autocomplete="off" placeholder="Найти сайт, инструмент или выполнить поиск…">
-    <kbd>Ctrl K</kbd>
-  </form>
+  <div class="container">
+    <header>
+      <div id="clock">00:00</div>
+      <div id="date">Загрузка даты...</div>
+    </header>
 
-  <div class="quick" id="quick"></div>
-  <div id="content"></div>
-  <footer><span id="total"></span><span>my-start-page · local only</span></footer>
-</main>
-</div>
+    <!-- Поисковая форма с атрибутом target="_blank" -->
+    <div class="search-box">
+      <form id="search-form" action="https://www.google.com/search" method="GET" target="_blank">
+        <div class="search-input-wrapper">
+          <select id="engine-select" class="engine-select">
+            <option value="google">G</option>
+            <option value="yandex">Y</option>
+            <option value="youtube">YT</option>
+            <option value="github">GH</option>
+          </select>
+          <input type="text" id="search-input" name="q" class="search-input" placeholder="Поиск в сети..." autofocus autocomplete="off">
+        </div>
+      </form>
+    </div>
 
-<div class="modal" id="modal"><div class="modal-box"><input id="cmd" placeholder="Командный поиск…"><div class="results" id="results"></div></div></div>
+    <main class="grid">
+      <!-- Программирование & Разработка -->
+      <div class="category-card">
+        <h2 class="category-title code">⚡ Code & Dev</h2>
+        <ul class="links-list">
+          <li class="link-item"><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub <span class="link-badge">Code</span></a></li>
+          <li class="link-item"><a href="https://codewars.com" target="_blank" rel="noopener noreferrer">Codewars <span class="link-badge">Practice</span></a></li>
+          <li class="link-item"><a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">Python Docs <span class="link-badge">Ref</span></a></li>
+          <li class="link-item"><a href="https://pypi.org" target="_blank" rel="noopener noreferrer">PyPI <span class="link-badge">Packages</span></a></li>
+          <li class="link-item"><a href="https://stackoverflow.com" target="_blank" rel="noopener noreferrer">StackOverflow <span class="link-badge">Q&A</span></a></li>
+        </ul>
+      </div>
 
-<script>
-const groups=[
-["Избранное",[
-["GitHub","Код","https://github.com","GH"],["ChatGPT","AI","https://chatgpt.com","AI"],["YouTube","Видео","https://youtube.com","YT"],["Google Drive","Файлы","https://drive.google.com","GD"],["Steam","Игры","https://store.steampowered.com","ST"],["Figma","Дизайн","https://figma.com","FG"],["Discord","Чаты","https://discord.com/app","DC"],["Wikipedia","Знания","https://wikipedia.org","W"]
-]],
-["Интернет",[
-["Google","Поиск","https://google.com","G"],["DuckDuckGo","Приватный поиск","https://duckduckgo.com","DD"],["Bing","Поиск","https://bing.com","B"],["Яндекс","Поиск","https://yandex.ru","Я"],["Reddit","Сообщества","https://reddit.com","R"],["Telegram","Мессенджер","https://web.telegram.org","TG"],["Discord","Сообщества","https://discord.com/app","DC"],["VK","Соцсеть","https://vk.com","VK"],["Pinterest","Идеи","https://pinterest.com","P"],["Twitch","Стримы","https://twitch.tv","TW"],["TikTok","Видео","https://tiktok.com","TT"],["Quora","Ответы","https://quora.com","Q"]
-]],
-["Нейросети",[
-["ChatGPT","AI-помощник","https://chatgpt.com","AI"],["Claude","AI-помощник","https://claude.ai","C"],["Gemini","Google AI","https://gemini.google.com","GE"],["Perplexity","AI-поиск","https://perplexity.ai","PX"],["Copilot","Microsoft AI","https://copilot.microsoft.com","CO"],["Grok","xAI","https://grok.com","GR"],["Hugging Face","Модели AI","https://huggingface.co","HF"],["NotebookLM","Исследования","https://notebooklm.google.com","NL"],["Poe","AI-боты","https://poe.com","PO"],["DeepSeek","AI","https://chat.deepseek.com","DS"],["Leonardo AI","Генерация","https://leonardo.ai","LA"],["ElevenLabs","Голос AI","https://elevenlabs.io","EL"],["Suno","Музыка AI","https://suno.com","SU"],["Canva AI","Дизайн AI","https://canva.com","CA"]
-]],
-["Разработка",[
-["GitHub","Репозитории","https://github.com","GH"],["GitLab","Git-хостинг","https://gitlab.com","GL"],["Stack Overflow","Вопросы","https://stackoverflow.com","SO"],["MDN","Web Docs","https://developer.mozilla.org","MD"],["W3Schools","Учебник Web","https://w3schools.com","W3"],["Python","Документация","https://docs.python.org/3/","PY"],["JavaScript.info","JavaScript","https://javascript.info","JS"],["npm","Пакеты JS","https://npmjs.com","N"],["PyPI","Пакеты Python","https://pypi.org","PI"],["Vercel","Деплой","https://vercel.com","VE"],["Netlify","Деплой","https://netlify.com","NE"],["CodePen","Frontend","https://codepen.io","CP"],["Replit","Онлайн IDE","https://replit.com","RP"],["JSFiddle","Web-песочница","https://jsfiddle.net","JF"],["Can I Use","Совместимость","https://caniuse.com","CI"],["Regex101","Regex-тестер","https://regex101.com","RX"],["JSON Crack","JSON визуализация","https://jsoncrack.com","JC"],["DevDocs","Документация","https://devdocs.io","DD"]
-]],
-["Дизайн и медиа",[
-["Figma","UI/UX","https://figma.com","FG"],["Canva","Дизайн","https://canva.com","CV"],["Photopea","Фото редактор","https://photopea.com","PP"],["Pixlr","Фото редактор","https://pixlr.com","PX"],["Remove.bg","Удалить фон","https://remove.bg","RB"],["TinyPNG","Сжать фото","https://tinypng.com","TP"],["Squoosh","Оптимизация","https://squoosh.app","SQ"],["Unsplash","Фото","https://unsplash.com","U"],["Pexels","Фото/видео","https://pexels.com","PE"],["Freepik","Ресурсы","https://freepik.com","FP"],["Coolors","Палитры","https://coolors.co","CO"],["Google Fonts","Шрифты","https://fonts.google.com","GF"],["DaFont","Шрифты","https://dafont.com","DF"],["Flaticon","Иконки","https://flaticon.com","FL"],["ILoveIMG","Изображения","https://iloveimg.com","II"],["CloudConvert","Конвертер","https://cloudconvert.com","CC"]
-]],
-["Игры",[
-["Steam","Игры","https://store.steampowered.com","ST"],["Epic Games","Игры","https://store.epicgames.com","EG"],["GOG","DRM-free","https://gog.com","GOG"],["Nintendo","Nintendo","https://nintendo.com","N"],["PlayStation","PlayStation","https://playstation.com","PS"],["Xbox","Xbox","https://xbox.com","X"],["PCGamingWiki","Гайды PC","https://pcgamingwiki.com","PC"],["ProtonDB","Linux gaming","https://protondb.com","PR"],["Modrinth","Minecraft mods","https://modrinth.com","MR"],["CurseForge","Моды","https://curseforge.com","CF"],["Nexus Mods","Моды","https://nexusmods.com","NM"],["Speedrun.com","Спидраны","https://speedrun.com","SR"],["HowLongToBeat","Время игры","https://howlongtobeat.com","HL"],["IsThereAnyDeal","Цены игр","https://isthereanydeal.com","IA"],["IGDB","База игр","https://igdb.com","IG"]
-]],
-["Полезные инструменты",[
-["Google Translate","Перевод","https://translate.google.com","TR"],["DeepL","Перевод","https://deepl.com","DL"],["Google Maps","Карты","https://maps.google.com","MP"],["Speedtest","Интернет","https://speedtest.net","ST"],["DownDetector","Сбои сервисов","https://downdetector.com","DD"],["VirusTotal","Проверка URL/файлов","https://virustotal.com","VT"],["Internet Archive","Архив сайтов","https://archive.org","IA"],["Wayback Machine","История сайтов","https://web.archive.org","WB"],["TinyWow","Онлайн-инструменты","https://tinywow.com","TW"],["iLovePDF","PDF инструменты","https://ilovepdf.com","PDF"],["QR Code Generator","QR-коды","https://www.qr-code-generator.com","QR"],["Temp Mail","Временная почта","https://temp-mail.org","TM"],["ExifTool Online","Метаданные","https://exif.tools","EX"],["Regex101","Regex","https://regex101.com","RX"],["WolframAlpha","Расчёты","https://wolframalpha.com","WA"],["Time.is","Точное время","https://time.is","TI"]
-]],
-["Учёба и знания",[
-["Wikipedia","Энциклопедия","https://wikipedia.org","W"],["Wiktionary","Словарь","https://wiktionary.org","WK"],["Khan Academy","Обучение","https://khanacademy.org","KA"],["Coursera","Курсы","https://coursera.org","CR"],["edX","Курсы","https://edx.org","ED"],["MIT OpenCourseWare","Материалы MIT","https://ocw.mit.edu","MIT"],["GeoGebra","Математика","https://geogebra.org","GG"],["Desmos","Графики","https://desmos.com","DE"],["WolframAlpha","Математика","https://wolframalpha.com","WA"],["Google Scholar","Научные статьи","https://scholar.google.com","GS"],["Project Gutenberg","Книги","https://gutenberg.org","PG"],["LibreTexts","Учебники","https://libretexts.org","LT"]
-]],
-["Файлы и работа",[
-["Google Drive","Облако","https://drive.google.com","GD"],["OneDrive","Облако","https://onedrive.live.com","OD"],["Dropbox","Файлы","https://dropbox.com","DB"],["MEGA","Облако","https://mega.io","MG"],["Notion","Заметки","https://notion.so","NO"],["Trello","Задачи","https://trello.com","TR"],["Google Docs","Документы","https://docs.google.com","DOC"],["Google Sheets","Таблицы","https://sheets.google.com","S"],["Google Slides","Презентации","https://slides.google.com","SL"],["Todoist","Задачи","https://todoist.com","TD"],["Pomofocus","Pomodoro","https://pomofocus.io","PF"],["Obsidian","Заметки","https://obsidian.md","OB"]
-]],
-["Новости и контент",[
-["Hacker News","Tech новости","https://news.ycombinator.com","HN"],["TechCrunch","Tech","https://techcrunch.com","TC"],["The Verge","Технологии","https://theverge.com","TV"],["Ars Technica","Tech","https://arstechnica.com","AR"],["9to5Google","Google новости","https://9to5google.com","9G"],["IGN","Игры","https://ign.com","IGN"],["GameSpot","Игры","https://gamespot.com","GS"],["Eurogamer","Игры","https://eurogamer.net","EU"],["YouTube","Видео","https://youtube.com","YT"],["Twitch","Стримы","https://twitch.tv","TW"]
-]]
-];
+      <!-- Учеба & Заметки -->
+      <div class="category-card">
+        <h2 class="category-title learn">📚 Study & Notes</h2>
+        <ul class="links-list">
+          <li class="link-item"><a href="https://edu.gounn.ru" target="_blank" rel="noopener noreferrer">Образование НО <span class="link-badge">School</span></a></li>
+          <li class="link-item"><a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian <span class="link-badge">Notes</span></a></li>
+          <li class="link-item"><a href="https://stepik.org" target="_blank" rel="noopener noreferrer">Stepik <span class="link-badge">Courses</span></a></li>
+          <li class="link-item"><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT <span class="link-badge">AI</span></a></li>
+        </ul>
+      </div>
 
-const nav=document.getElementById("nav"),content=document.getElementById("content"),quick=document.getElementById("quick"),search=document.getElementById("search");
-groups.forEach((g,i)=>{let b=document.createElement("button");b.textContent=g[0];b.onclick=()=>document.getElementById("sec"+i)?.scrollIntoView({behavior:"smooth"});nav.appendChild(b)});
-const favs=JSON.parse(localStorage.getItem("favs")||"[]");
+      <!-- Арт & Вдохновение -->
+      <div class="category-card">
+        <h2 class="category-title art">🎨 Art & Design</h2>
+        <ul class="links-list">
+          <li class="link-item"><a href="https://artstation.com" target="_blank" rel="noopener noreferrer">ArtStation <span class="link-badge">Gallery</span></a></li>
+          <li class="link-item"><a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest <span class="link-badge">Refs</span></a></li>
+          <li class="link-item"><a href="https://color.adobe.com" target="_blank" rel="noopener noreferrer">Adobe Color <span class="link-badge">Palettes</span></a></li>
+          <li class="link-item"><a href="https://krita.org" target="_blank" rel="noopener noreferrer">Krita <span class="link-badge">Paint</span></a></li>
+        </ul>
+      </div>
 
-function render(){
-content.innerHTML=groups.map((g,gi)=>'<section class="section" id="sec'+gi+'"><div class="section-head"><span class="title">'+g[0]+'</span><span class="count">'+g[1].length+' сайтов</span></div><div class="grid">'+g[1].map((x,i)=>'<a class="card" href="'+x[2]+'" data-search="'+(x[0]+" "+x[1]).toLowerCase()+'"><span style="min-width:0"><div class="name">'+x[0]+'</div><div class="desc">'+x[1]+'</div></span><span class="fav '+(favs.includes(x[2])?"on":"")+'" data-url="'+x[2]+'">★</span></a>').join("")+'</div></section>').join("");
-document.querySelectorAll(".fav").forEach(f=>f.onclick=e=>{e.preventDefault();e.stopPropagation();const u=f.dataset.url;const n=favs.indexOf(u);n<0?favs.push(u):favs.splice(n,1);localStorage.setItem("favs",JSON.stringify(favs));f.classList.toggle("on")});
-document.getElementById("total").textContent=groups.reduce((n,g)=>n+g[1].length,0)+" полезных сайтов";
-}
-render();
+      <!-- Инструменты & Медиа -->
+      <div class="category-card">
+        <h2 class="category-title tools">🛠️ Media & Tools</h2>
+        <ul class="links-list">
+          <li class="link-item"><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube <span class="link-badge">Video</span></a></li>
+          <li class="link-item"><a href="https://twitch.tv" target="_blank" rel="noopener noreferrer">Twitch <span class="link-badge">Stream</span></a></li>
+          <li class="link-item"><a href="https://music.yandex.ru" target="_blank" rel="noopener noreferrer">Yandex Music <span class="link-badge">Audio</span></a></li>
+          <li class="link-item"><a href="https://virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal <span class="link-badge">Sec</span></a></li>
+        </ul>
+      </div>
+    </main>
+  </div>
 
-const quickItems=[["GitHub","https://github.com"],["YouTube","https://youtube.com"],["ChatGPT","https://chatgpt.com"],["Discord","https://discord.com/app"],["Google Drive","https://drive.google.com"],["Steam","https://store.steampowered.com"],["Figma","https://figma.com"],["Wikipedia","https://wikipedia.org"]];
-quick.innerHTML=quickItems.map(x=>'<a href="'+x[1]+'">'+x[0]+'</a>').join("");
+  <script>
+    // Часы и дата
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}`;
 
-function clock(){const d=new Date();document.getElementById("time").textContent=d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});document.getElementById("seconds").textContent=d.toLocaleTimeString("ru-RU",{second:"2-digit"}).replace(/.*:/,"");document.getElementById("day").textContent=d.toLocaleDateString("ru-RU",{weekday:"long"});document.getElementById("fullDate").textContent=d.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});document.getElementById("hello").innerHTML=(d.getHours()<6?"Доброй ночи":d.getHours()<12?"Доброе утро":d.getHours()<18?"Добрый день":"Добрый вечер")+', <strong>Артемий</strong>'}
-clock();setInterval(clock,1000);
+      const options = { weekday: 'long', day: 'numeric', month: 'long' };
+      document.getElementById('date').textContent = now.toLocaleDateString('ru-RU', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-document.getElementById("form").onsubmit=e=>{e.preventDefault();const q=search.value.trim();if(!q)return;const cards=[...document.querySelectorAll(".card")];const match=cards.find(c=>c.dataset.search.includes(q.toLowerCase()));if(match){location.href=match.href}else{location.href=document.getElementById("engine").value+encodeURIComponent(q)}};
-search.oninput=()=>{const q=search.value.toLowerCase().trim();document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hidden",q&&!c.dataset.search.includes(q)));document.querySelectorAll(".section").forEach(s=>s.classList.toggle("hidden",s.querySelectorAll(".card:not(.hidden)").length===0))};
-document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search.focus();search.select()}if(e.key==="Escape"){search.value="";search.dispatchEvent(new Event("input"));search.focus()}});
-document.getElementById("random").onclick=()=>{const c=[...document.querySelectorAll(".card:not(.hidden)")];if(c.length)location.href=c[Math.floor(Math.random()*c.length)].href};
+    // Переключение поисковых систем
+    const form = document.getElementById('search-form');
+    const input = document.getElementById('search-input');
+    const select = document.getElementById('engine-select');
 
-const theme=document.getElementById("theme");if(localStorage.getItem("theme")==="light")document.body.classList.add("light");theme.onclick=()=>{document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark")};
+    const engines = {
+      google: { action: 'https://www.google.com/search', name: 'q' },
+      yandex: { action: 'https://yandex.ru/search/', name: 'text' },
+      youtube: { action: 'https://www.youtube.com/results', name: 'search_query' },
+      github: { action: 'https://github.com/search', name: 'q' }
+    };
 
-const modal=document.getElementById("modal"),cmd=document.getElementById("cmd"),results=document.getElementById("results");
-const all=groups.flatMap(g=>g[1]);function showResults(q=""){const arr=all.filter(x=>(x[0]+" "+x[1]).toLowerCase().includes(q.toLowerCase())).slice(0,30);results.innerHTML=arr.map(x=>'<a class="result" href="'+x[2]+'"><b>'+x[3]+' · '+x[0]+'</b><span>'+x[1]+' · '+x[2].replace(/^https?:\/\//,"").split("/")[0]+'</span></a>').join("")}
-cmd.oninput=()=>showResults(cmd.value);document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();modal.classList.add("open");cmd.value=search.value;showResults(cmd.value);cmd.focus()}if(e.key==="Escape"&&modal.classList.contains("open")){modal.classList.remove("open");search.focus()}});modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};
-</script>
+    select.addEventListener('change', () => {
+      const selected = engines[select.value];
+      form.action = selected.action;
+      input.name = selected.name;
+    });
+  </script>
 </body>
 </html>
